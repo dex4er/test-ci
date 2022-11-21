@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+  repository_dispatch:
+    types:
+      - test-ci-dispatch
 
 jobs:
   build:
@@ -12,5 +15,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run a one-line script
+      - name: Show events
         run: set
