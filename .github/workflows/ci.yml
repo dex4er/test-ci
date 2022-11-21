@@ -19,5 +19,8 @@ jobs:
         run: set
 
       - name: Show event
-        run: echo "${{ toJson(github.event) }}" | jq -c .
+        run: |
+          jq . << 'END'
+          ${{ toJson(github.event) }}
+          END
   
