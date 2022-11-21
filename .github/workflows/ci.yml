@@ -15,5 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Show events
+      - name: Show environment
         run: set
+
+      - name: Show event
+        run: echo "${{ toJson(github.event) }}" | jq -c .
+  
