@@ -4,6 +4,10 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+
   repository_dispatch:
     types:
       - test-ci-dispatch
