@@ -5,9 +5,8 @@ on:
   pull_request:
   workflow_dispatch:
     inputs:
-      environment:
-        type: environment
-
+      ref:
+      sha:
   repository_dispatch:
     types:
       - test-ci-dispatch
