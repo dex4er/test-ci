@@ -30,8 +30,8 @@ jobs:
       - name: Show environment
         run: set
 
-      - name: Show event
+      - name: Show context
         run: |
           jq . << 'END'
-          ${{ toJson(github.event) }}
+          ${{ toJson(github) }}
           END
