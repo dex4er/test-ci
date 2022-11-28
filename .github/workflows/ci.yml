@@ -3,6 +3,7 @@ name: CI
 on:
   push:
   pull_request:
+  release:
   workflow_dispatch:
     inputs:
       ref:
@@ -26,4 +27,3 @@ jobs:
           jq . << 'END'
           ${{ toJson(github.event) }}
           END
-  
