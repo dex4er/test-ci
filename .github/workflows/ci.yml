@@ -23,6 +23,9 @@ jobs:
         with:
           tool_versions: |
             python 3.10.1
+            
+      - name: Show python
+        run: python --version
 
       - name: Show environment
         run: set
