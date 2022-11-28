@@ -18,6 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Show version
+        run: yq --version
+
       - name: Show environment
         run: set
 
@@ -26,4 +29,3 @@ jobs:
           jq . << 'END'
           ${{ toJson(github.event) }}
           END
-  
