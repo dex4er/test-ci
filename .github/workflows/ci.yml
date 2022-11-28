@@ -18,6 +18,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: Failure
+        run: test -f foobarbaz
+
       - name: Setup asdf
         uses: asdf-vm/actions/install@v1
         with:
