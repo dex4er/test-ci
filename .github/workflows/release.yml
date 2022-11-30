@@ -27,6 +27,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           custom_tag: ${{ steps.tag-version.outputs.new_tag }}
+          tag_prefix: ""
 
       - name: Changelog
         id: changelog
