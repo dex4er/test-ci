@@ -22,11 +22,13 @@ jobs:
         id: tags
         run: |
           last=$(git describe --tags --abbrev=0)
-          echo tag=$last >> $GITHUB_OUTPUT
           case "$GITHUB_REF_NAME" in
-            main) echo new=v$(npx semver $last --increment patch) >> $GITHUB_OUTPUT;;
-            *) echo new=v$(npx semver $last --increment prerelease $GITHUB_REF_NAME) >> $GITHUB_OUTPUT
+            main) new=v$(npx semver $last --increment patch)
+            *) new=v$(npx semver $last --increment prerelease $GITHUB_REF_NAME)
           esac
+          test "$new" != "v"
+          echo last=$last >> $GITHUB_OUTPUT
+          echo new=$new >> $GITHUB_OUTPUT
 
       - name: Create new tag
         uses: rickstaa/action-create-tag@v1
