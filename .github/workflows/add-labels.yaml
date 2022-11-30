@@ -17,4 +17,4 @@ jobs:
         with:
           token: ${{secrets.GITHUB_TOKEN}}
           labels: ready for review
-          type: remove
+          type: add
