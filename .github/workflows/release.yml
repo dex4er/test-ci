@@ -15,12 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Update CHANGELOG
+      - name: Changelog
         id: changelog
-        uses: requarks/changelog-action@v1
-        with:
-          token: ${{ github.token }}
-          tag: ${{ github.ref_name }}
+        uses: scottbrenner/generate-changelog-action@master
 
       - name: Create Release
         uses: ncipollo/release-action@v1
@@ -28,5 +25,5 @@ jobs:
           allowUpdates: true
           draft: false
           name: Release ${{ github.ref_name }}
-          body: ${{ steps.changelog.outputs.changes }}
+          body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.GITHUB_TOKEN }}
