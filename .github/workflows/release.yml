@@ -15,12 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Get previous tag
+      - name: Get previous release
         id: previous-release
-        uses: sammcoe/get-previous-release-action@v1
-
-      - name: Show current tag
-        run: git describe --tags --abbrev=0
+        run: tag=$(gh release list -L 1 | cut -f3) >> $GITHUB_OUTPUT
 
       - name: Changelog
         id: changelog
@@ -32,7 +29,7 @@ jobs:
           issuesWoLabels: true
           pullRequests: true
           prWoLabels: true
-          sinceTag: ${{ steps.previous-release.outputs.release }}
+          sinceTag: ${{ steps.previous-release.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
           stripGeneratorNotice: true
 
