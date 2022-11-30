@@ -15,21 +15,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Calculate new version
-        id: tag-version
-        uses: mathieudutour/github-tag-action@v6.1
         with:
-          pre_release_branches: release
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          dry_run: true
+          fetch-depth: 0
+
+      - name: Calculate new tag
+        id: tags
+        run: |
+          last=$(git describe --tags --abbrev=0)
+          case "$GITHUB_REF_NAME" in
+            main) new=v$(npx semver $last --increment patch);;
+            *) new=v$(npx semver $last --increment prerelease $GITHUB_REF_NAME)
+          esac
+          test "$new" != "v"
+          echo last=$last >> $GITHUB_OUTPUT
+          echo new=$new >> $GITHUB_OUTPUT
 
       - name: Create new tag
-        uses: mathieudutour/github-tag-action@v6.1
+        uses: rickstaa/action-create-tag@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          custom_tag: ${{ steps.tag-version.outputs.new_tag }}
-          tag_prefix: ""
+          tag: ${{ steps.tags.outputs.new }}
 
       - name: Changelog
         id: changelog
@@ -41,7 +46,7 @@ jobs:
           issuesWoLabels: true
           pullRequests: true
           prWoLabels: true
-          sinceTag: ${{ steps.tag-version.outputs.previous_tag }}
+          sinceTag: ${{ steps.tags.outputs.last }}
           token: ${{ secrets.GITHUB_TOKEN }}
           stripGeneratorNotice: true
 
@@ -50,7 +55,7 @@ jobs:
         with:
           allowUpdates: true
           draft: false
-          tag: ${{ steps.tag-version.outputs.new_tag }}
-          name: Release ${{ steps.tag-version.outputs.new_tag }}
+          tag: ${{ steps.tags.outputs.new }}
+          name: Release ${{ steps.tags.outputs.new }}
           body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.GITHUB_TOKEN }}
