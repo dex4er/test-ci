@@ -19,7 +19,7 @@ jobs:
       - name: Calculate new tag
         id: tags
         run: |
-          last=$(git describe --tags 2>/dev/null || echo 0.0.0)
+          last=$(git describe --tags --abbrev=0)
           echo tag=$last >> $GITHUB_OUTPUT
           case "$GITHUB_REF_NAME" in
             main) echo new=v$(npx semver $last --increment patch) >> $GITHUB_OUTPUT;;
