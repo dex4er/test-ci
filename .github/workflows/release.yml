@@ -15,17 +15,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Get last tag
+        id: last_tag
+        run: tag=$(git describe --tags --abbrev=0) >> $GITHUB_OUTPUT
+
       - name: Changelog
         id: changelog
         uses: heinrichreimer/github-changelog-generator-action@v2.3
         with:
           compareLink: true
           filterByMilestone: false
-          onlyLastTag: true
           issues: true
           issuesWoLabels: true
           pullRequests: true
           prWoLabels: true
+          sinceTag: ${{ steps.last_tag.outputs.tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
           stripGeneratorNotice: true
 
