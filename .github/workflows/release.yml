@@ -19,6 +19,9 @@ jobs:
         id: tags
         uses: JinoArch/get-latest-tag@latest
 
+      - name: Show current tag
+        run: git describe --tags --abbrev=0
+
       - name: Changelog
         id: changelog
         uses: heinrichreimer/github-changelog-generator-action@v2.3
