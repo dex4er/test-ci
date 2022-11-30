@@ -19,6 +19,7 @@ jobs:
       - name: Calculate new tag
         id: tags
         run: |
+          git fetch --tags --force --quiet
           last=$(git describe --tags --abbrev=0)
           echo tag=$last >> $GITHUB_OUTPUT
           case "$GITHUB_REF_NAME" in
