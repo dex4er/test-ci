@@ -20,7 +20,7 @@ jobs:
         id: tags
         run: |
           git fetch --tags --force --quiet
-          last=$(git describe --tags --abbrev=0)
+          last=$(git describe --always --tags --abbrev=0)
           echo tag=$last >> $GITHUB_OUTPUT
           case "$GITHUB_REF_NAME" in
             main) echo new=v$(npx semver $last --increment patch) >> $GITHUB_OUTPUT;;
