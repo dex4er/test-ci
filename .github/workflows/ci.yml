@@ -27,12 +27,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get previous tag
-        id: previoustag
-        uses: WyriHaximus/github-action-get-previous-tag@v1
+      - name: Get latest and previous tag
+        id: tags
+        uses: JinoArch/get-latest-tag@latest
+
+      - name: Show latest tag
+        run: echo ${{ steps.tags.outputs.latestTag }}
 
       - name: Show previous tag
-        run: echo ${{ steps.previoustag.outputs.tag }}
+        run: echo ${{ steps.tags.outputs.previousTag }}
 
       - name: Show environment
         run: set
