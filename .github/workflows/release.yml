@@ -47,6 +47,7 @@ jobs:
           pullRequests: true
           prWoLabels: true
           sinceTag: ${{ steps.tags.outputs.last }}
+          dueTag: ${{ steps.tags.outputs.new }}
           token: ${{ secrets.GITHUB_TOKEN }}
           stripGeneratorNotice: true
 
