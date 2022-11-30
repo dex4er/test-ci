@@ -1,0 +1,20 @@
+name: Add labels
+
+on:
+  pull_request:
+    types:
+      - ready_for_review
+
+jobs:
+  add-labels:
+    name: Add labels
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Add on PR ready for review
+        if: github.event_name == 'pull_request' && github.event.action == 'ready_for_review'
+        uses: buildsville/add-remove-label@v2.0.0
+        with:
+          token: ${{secrets.BUILD_BOT_TOKEN}}
+          labels: ready for review
+          type: remove
