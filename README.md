@@ -4,4 +4,4 @@ Test of GitHub Actions.
 
 Various scenarios.
 
-Another prelease.
+Another prelease..
