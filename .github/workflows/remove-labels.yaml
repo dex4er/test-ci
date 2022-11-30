@@ -1,0 +1,31 @@
+name: Remove labels
+
+on:
+  pull_request:
+    types:
+      - closed
+  pull_request_review:
+    types:
+      - submitted
+
+jobs:
+  remove-labels:
+    name: Remove labels
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Remove on PR closed
+        if: github.event_name == 'pull_request' && github.event.action == 'closed'
+        uses: buildsville/add-remove-label@v2.0.0
+        with:
+          token: ${{secrets.BUILD_BOT_TOKEN}}
+          labels: ready for review, staging, testing
+          type: remove
+
+      - name: Remove on PR reviewed
+        if: github.event_name == 'pull_request_review'
+        uses: buildsville/add-remove-label@v2.0.0
+        with:
+          token: ${{secrets.BUILD_BOT_TOKEN}}
+          labels: ready for review
+          type: remove
