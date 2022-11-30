@@ -18,6 +18,13 @@ jobs:
       - name: Changelog
         id: changelog
         uses: heinrichreimer/github-changelog-generator-action@v2.3
+        with:
+          compareLink: true
+          onlyLastTag: true
+          issues: true
+          pullRequests: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          stripGeneratorNotice: true
 
       - name: Create Release
         uses: ncipollo/release-action@v1
