@@ -23,7 +23,7 @@ jobs:
         run: |
           last=$(git describe --tags --abbrev=0)
           case "$GITHUB_REF_NAME" in
-            main) new=v$(npx semver $last --increment patch)
+            main) new=v$(npx semver $last --increment patch);;
             *) new=v$(npx semver $last --increment prerelease $GITHUB_REF_NAME)
           esac
           test "$new" != "v"
