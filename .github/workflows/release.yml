@@ -15,11 +15,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Get previous release
-        id: previous-release
-        run: tag=$(gh release list -L 1 | cut -f3) >> $GITHUB_OUTPUT
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Calculate new version
+        id: tag-version
+        uses: mathieudutour/github-tag-action@v6.1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          dry_run: true
 
       - name: Changelog
         id: changelog
@@ -31,7 +32,7 @@ jobs:
           issuesWoLabels: true
           pullRequests: true
           prWoLabels: true
-          sinceTag: ${{ steps.previous-release.outputs.tag }}
+          sinceTag: ${{ steps.tag-version.outputs.previous_tag }}
           token: ${{ secrets.GITHUB_TOKEN }}
           stripGeneratorNotice: true
 
@@ -40,6 +41,7 @@ jobs:
         with:
           allowUpdates: true
           draft: false
-          name: Release ${{ github.ref_name }}
+          tag: ${{ steps.tag-version.outputs.new_tag }}
+          name: Release ${{ steps.tag-version.outputs.new_tag }}
           body: ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.GITHUB_TOKEN }}
