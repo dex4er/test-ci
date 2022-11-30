@@ -20,9 +20,12 @@ jobs:
         uses: heinrichreimer/github-changelog-generator-action@v2.3
         with:
           compareLink: true
+          filterByMilestone: false
           onlyLastTag: true
           issues: true
+          issuesWoLabels: true
           pullRequests: true
+          prWoLabels: true
           token: ${{ secrets.GITHUB_TOKEN }}
           stripGeneratorNotice: true
 
