@@ -44,8 +44,7 @@ jobs:
           issues: false
           pullRequests: true
           prWoLabels: true
-          sinceTag: ${{ steps.tags.outputs.last }}
-          dueTag: ${{ steps.tags.outputs.new }}
+          onlyLastTag: true
           token: ${{ secrets.GITHUB_TOKEN }}
           stripGeneratorNotice: true
 
