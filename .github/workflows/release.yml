@@ -46,10 +46,17 @@ jobs:
           issuesWoLabels: true
           pullRequests: true
           prWoLabels: true
+          unreleased: false
           sinceTag: ${{ steps.tags.outputs.last }}
           dueTag: ${{ steps.tags.outputs.new }}
           token: ${{ secrets.GITHUB_TOKEN }}
           stripGeneratorNotice: true
+
+      - name: Show changelog
+        run: |
+          cat << END
+          ${{ steps.changelog.outputs.changelog }}
+          END
 
       - name: Create Release
         uses: ncipollo/release-action@v1
