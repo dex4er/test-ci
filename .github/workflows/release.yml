@@ -27,8 +27,8 @@ jobs:
             *) new=v$(npx semver $last --increment prerelease $GITHUB_REF_NAME)
           esac
           test "$new" != "v"
-          echo last=$last >> $GITHUB_OUTPUT
-          echo new=$new >> $GITHUB_OUTPUT
+          echo last=$last | tee -a $GITHUB_OUTPUT
+          echo new=$new | tee -a $GITHUB_OUTPUT
 
       - name: Create new tag
         uses: rickstaa/action-create-tag@v1
