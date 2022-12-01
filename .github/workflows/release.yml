@@ -41,7 +41,7 @@ jobs:
         uses: heinrichreimer/github-changelog-generator-action@v2.3
         with:
           compareLink: true
-          filterByMilestone: false
+          filterByMilestone: true
           issues: true
           issuesWoLabels: true
           pullRequests: true
