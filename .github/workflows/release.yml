@@ -41,12 +41,9 @@ jobs:
         uses: heinrichreimer/github-changelog-generator-action@v2.3
         with:
           compareLink: true
-          filterByMilestone: true
-          issues: true
-          issuesWoLabels: true
+          issues: false
           pullRequests: true
           prWoLabels: true
-          unreleased: false
           sinceTag: ${{ steps.tags.outputs.last }}
           dueTag: ${{ steps.tags.outputs.new }}
           token: ${{ secrets.GITHUB_TOKEN }}
