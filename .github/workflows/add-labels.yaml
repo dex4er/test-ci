@@ -17,7 +17,7 @@ jobs:
         if: (github.event.action == 'opened' && github.event.pull_request.draft) || github.event.action == 'converted_to_draft'
         uses: buildsville/add-remove-label@v2.0.0
         with:
-          token: ${{secrets.BUILD_BOT_TOKEN}}
+          token: ${{secrets.GITHUB_TOKEN}}
           labels: WIP
           type: add
 
@@ -25,6 +25,6 @@ jobs:
         if: (github.event.action == 'opened' && !github.event.pull_request.draft) || github.event.action == 'ready_for_review'
         uses: buildsville/add-remove-label@v2.0.0
         with:
-          token: ${{secrets.BUILD_BOT_TOKEN}}
+          token: ${{secrets.GITHUB_TOKEN}}
           labels: ready for review
           type: add

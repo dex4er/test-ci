@@ -20,7 +20,7 @@ jobs:
         if: github.event_name == 'pull_request' && github.event.action == 'closed'
         uses: buildsville/add-remove-label@v2.0.0
         with:
-          token: ${{secrets.BUILD_BOT_TOKEN}}
+          token: ${{secrets.GITHUB_TOKEN}}
           labels: ready for review, staging, testing, WIP
           type: remove
 
@@ -28,7 +28,7 @@ jobs:
         if: github.event_name == 'pull_request_review'
         uses: buildsville/add-remove-label@v2.0.0
         with:
-          token: ${{secrets.BUILD_BOT_TOKEN}}
+          token: ${{secrets.GITHUB_TOKEN}}
           labels: ready for review, WIP
           type: remove
 
@@ -36,7 +36,7 @@ jobs:
         if: github.event_name == 'pull_request' && github.event.action == 'converted_to_draft'
         uses: buildsville/add-remove-label@v2.0.0
         with:
-          token: ${{secrets.BUILD_BOT_TOKEN}}
+          token: ${{secrets.GITHUB_TOKEN}}
           labels: ready for review
           type: remove
 
@@ -44,6 +44,6 @@ jobs:
         if: github.event_name == 'pull_request' && github.event.action == 'ready_for_review'
         uses: buildsville/add-remove-label@v2.0.0
         with:
-          token: ${{secrets.BUILD_BOT_TOKEN}}
+          token: ${{secrets.GITHUB_TOKEN}}
           labels: WIP
           type: remove
