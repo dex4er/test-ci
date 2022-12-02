@@ -3,6 +3,8 @@ name: Add labels
 on:
   pull_request:
     types:
+      - opened
+      - converted_to_draft
       - ready_for_review
 
 jobs:
@@ -11,10 +13,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Add on PR ready for review
-        if: github.event_name == 'pull_request' && github.event.action == 'ready_for_review'
+      - name: Add on PR WIP
+        if: (github.event.action == 'opened' && github.event.pull_request.draft) || github.event.action == 'converted_to_draft'
         uses: buildsville/add-remove-label@v2.0.0
         with:
-          token: ${{secrets.GITHUB_TOKEN}}
+          token: ${{secrets.BUILD_BOT_TOKEN}}
+          labels: WIP
+          type: add
+
+      - name: Add on PR ready for review
+        if: (github.event.action == 'opened' && !github.event.pull_request.draft) || github.event.action == 'ready_for_review'
+        uses: buildsville/add-remove-label@v2.0.0
+        with:
+          token: ${{secrets.BUILD_BOT_TOKEN}}
           labels: ready for review
           type: add

@@ -5,6 +5,7 @@ on:
     types:
       - closed
       - converted_to_draft
+      - ready_for_review
   pull_request_review:
     types:
       - submitted
@@ -19,14 +20,30 @@ jobs:
         if: github.event_name == 'pull_request' && github.event.action == 'closed'
         uses: buildsville/add-remove-label@v2.0.0
         with:
-          token: ${{secrets.GITHUB_TOKEN}}
-          labels: ready for review, staging, testing
+          token: ${{secrets.BUILD_BOT_TOKEN}}
+          labels: ready for review, staging, testing, WIP
           type: remove
 
-      - name: Remove on PR reviewed or converted to draft
-        if: github.event_name == 'pull_request_review' || (github.event_name == 'pull_request' && github.event.action == 'converted_to_draft')
+      - name: Remove on PR reviewed
+        if: github.event_name == 'pull_request_review'
         uses: buildsville/add-remove-label@v2.0.0
         with:
-          token: ${{secrets.GITHUB_TOKEN}}
+          token: ${{secrets.BUILD_BOT_TOKEN}}
+          labels: ready for review, WIP
+          type: remove
+
+      - name: Remove on PR WIP
+        if: github.event_name == 'pull_request' && github.event.action == 'converted_to_draft'
+        uses: buildsville/add-remove-label@v2.0.0
+        with:
+          token: ${{secrets.BUILD_BOT_TOKEN}}
           labels: ready for review
+          type: remove
+
+      - name: Remove on PR ready for review
+        if: github.event_name == 'pull_request' && github.event.action == 'ready_for_review'
+        uses: buildsville/add-remove-label@v2.0.0
+        with:
+          token: ${{secrets.BUILD_BOT_TOKEN}}
+          labels: WIP
           type: remove
