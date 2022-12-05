@@ -27,21 +27,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get latest and previous tag
-        id: tags
-        uses: JinoArch/get-latest-tag@latest
+      - uses: actions/setup-node@v3
 
-      - name: Show latest tag
-        run: echo ${{ steps.tags.outputs.latestTag }}
-
-      - name: Show previous tag
-        run: echo ${{ steps.tags.outputs.previousTag }}
-
-      - name: Show environment
-        run: set
-
-      - name: Show github context
-        run: |
-          jq -C . << 'END'
-          ${{ toJson(github) }}
-          END
+      - run: |
+          node -v
+          npm -v
+          yarn -v
