@@ -1,0 +1,22 @@
+name: Sync labels
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Sync labels
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install github-label-sync
+        run: npm install -g github-label-sync
+
+      - name: Run github-label-sync
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh repo list dex4er --topic test --json nameWithOwner -q '.[].nameWithOwner' -L 1000 |
+          xargs -t -n1 github-label-sync -a $GITHUB_TOKEN -l labels/caspiandb.yaml -A
