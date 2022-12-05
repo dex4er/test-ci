@@ -16,7 +16,7 @@ jobs:
 
       - name: Run github-label-sync
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh repo list dex4er --topic test --json nameWithOwner -q '.[].nameWithOwner' -L 1000 |
           xargs -t -n1 github-label-sync -a $GITHUB_TOKEN -l labels.yaml -A
