@@ -29,8 +29,8 @@ jobs:
 
       - name: Enable Docker experimental
         run: |
-          yq -i '.experimental=true' /etc/docker/daemon.json
-          systemctl restart docker.service
+          sudo yq -i '.experimental=true' /etc/docker/daemon.json
+          sudo systemctl restart docker.service
 
       - name: Get latest and previous tag
         id: tags
