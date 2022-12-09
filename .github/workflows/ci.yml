@@ -45,3 +45,6 @@ jobs:
           jq -C . << 'END'
           ${{ toJson(github) }}
           END
+
+      - name: Show packages
+        run: dpkg -l
