@@ -1,0 +1,31 @@
+name: New branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Name of new branch
+        required: true
+
+jobs:
+  new_branch:
+    name: New branch
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push to branch
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: .
+          author_email: buildbot@caspiandb.com
+          author_name: caspiandb-build
+          committer_email: buildbot@caspiandb.com
+          committer_name: caspiandb-build
+          message: Trunk fix
+          pull: --rebase --autostash
+          new_branch: ${{ github.event.inputs.branch }}
