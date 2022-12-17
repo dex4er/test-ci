@@ -14,8 +14,9 @@ on:
       - published
   workflow_dispatch:
     inputs:
-      ref:
-      sha:
+      environment:
+        description: Environment
+        type: environment
   repository_dispatch:
     types:
       - test-ci-dispatch
@@ -23,6 +24,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
 
     steps:
       - uses: actions/checkout@v3
