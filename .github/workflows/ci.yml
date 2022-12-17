@@ -27,16 +27,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get latest and previous tag
-        id: tags
-        uses: JinoArch/get-latest-tag@latest
-
-      - name: Show latest tag
-        run: echo ${{ steps.tags.outputs.latestTag }}
-
-      - name: Show previous tag
-        run: echo ${{ steps.tags.outputs.previousTag }}
-
       - name: Show environment
         run: set
 
@@ -45,6 +35,3 @@ jobs:
           jq -C . << 'END'
           ${{ toJson(github) }}
           END
-
-      - name: Show packages
-        run: dpkg -l
