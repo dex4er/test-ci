@@ -37,3 +37,21 @@ jobs:
           jq -C . << 'END'
           ${{ toJson(github) }}
           END
+          
+      - name: Show secrets context
+        run: |
+          jq -C . << 'END'
+          ${{ toJson(secrets) }}
+          END
+          
+      - name: Show env context
+        run: |
+          jq -C . << 'END'
+          ${{ toJson(env) }}
+          END
+          
+      - name: Show vars context
+        run: |
+          jq -C . << 'END'
+          ${{ toJson(vars) }}
+          END
