@@ -57,6 +57,7 @@ jobs:
           END
 
       - run: brew install cpm perltidy
-      - run: cpm install -g --no-test Perl::Critic
+      - run: cpm --version
+      - run: cpm install -g --no-test --color Perl::Critic
       - run: perltidy --version
       - run: perlcritic --version
