@@ -56,7 +56,7 @@ jobs:
           ${{ toJson(vars) }}
           END
 
-      - run: brew install cpanminus perltidy
-      - run: cpanm -n Perl::Critic
+      - run: brew install cpm perltidy
+      - run: cpm install -g --no-test Perl::Critic
       - run: perltidy --version
       - run: perlcritic --version
