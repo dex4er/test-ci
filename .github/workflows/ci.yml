@@ -56,6 +56,12 @@ jobs:
           ${{ toJson(vars) }}
           END
 
+      - name: Cache Perl cpm
+        uses: actions/cache@v3
+        with:
+          path: ~/.perl-cpm/cache
+          key: ${{ runner.os }}-cpm
+
       - run: brew install cpm
       - run: cpm install -g --no-test --color Perl::Critic Perl::Tidy
       - run: brew unlink perl && brew link perl
