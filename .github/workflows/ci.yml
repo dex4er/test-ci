@@ -58,6 +58,6 @@ jobs:
 
       - run: brew install cpm perltidy
       - run: cpm install -g --no-test --color Perl::Critic
-      - run: brew unlink perl && brew link perl
+      - run: brew unlink perl && brew link --overwrite perl
       - run: perltidy --version
       - run: perlcritic --version
