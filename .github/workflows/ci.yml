@@ -56,8 +56,8 @@ jobs:
           ${{ toJson(vars) }}
           END
 
-      - run: brew install cpm perltidy
-      - run: cpm install -g --no-test --color Perl::Critic
-      - run: brew unlink perl && brew link --overwrite perl
+      - run: brew install cpm
+      - run: cpm install -g --no-test --color Perl::Critic Perl::Tidy
+      - run: brew unlink perl && brew link perl
       - run: perltidy --version
       - run: perlcritic --version
