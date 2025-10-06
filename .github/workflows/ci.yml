@@ -58,7 +58,7 @@ jobs:
 
       - run: |
           mkdir empty
-          sudo rsync -a --delete empty/ /usr/share/dotnet/
+          sudo find /usr/share/dotnet -delete
 
       - run: |
-          sudo rsync -a --delete empty/ /usr/local/lib/android/
+          sudo find /usr/local/lib/android -delete
