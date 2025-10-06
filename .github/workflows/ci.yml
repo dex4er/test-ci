@@ -57,8 +57,8 @@ jobs:
           END
 
       - run: |
-          mkdir empty
           sudo find /usr/share/dotnet -delete
 
       - run: |
+          ls -l /usr/local/lib/android
           sudo find /usr/local/lib/android -delete
