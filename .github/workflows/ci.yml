@@ -57,9 +57,9 @@ jobs:
           END
 
       - run: |
-          du -h -s /usr/share/dotnet/*
+          du -h -s /usr/share/dotnet/sdk/*
           sudo find /usr/share/dotnet -delete
 
       - run: |
-          du -h -s /usr/local/lib/android/sdk/*
+          du -h -s /usr/local/lib/android/sdk/ndk/*
           sudo find /usr/local/lib/android -delete
