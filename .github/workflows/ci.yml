@@ -57,13 +57,7 @@ jobs:
           END
 
       - run: |
-          du -s -h /usr/share/dotnet
-          find /usr/share/dotnet | wc -l
+          find /usr/share/dotnet -type f -print0 | xargs -0 -P 8 rm -f
 
       - run: |
-          du -s -h /usr/local/lib/android
-          find /usr/local/lib/android | wc -l
-
-      - run: |
-          du -s -h /opt/ghc
-          find /opt/ghc | wc -l
+          find /usr/local/lib/android -type f -print0 | xargs -0 -P 8 rm -f
