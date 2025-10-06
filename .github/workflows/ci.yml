@@ -57,7 +57,8 @@ jobs:
           END
 
       - run: |
-          find /usr/share/dotnet -type f -print0 | xargs -0 -P 8 rm -f
+          mkdir empty
+          rsync -a --delete empty/ /usr/share/dotnet/
 
       - run: |
-          find /usr/local/lib/android -type f -print0 | xargs -0 -P 8 rm -f
+          rsync -a --delete empty/ /usr/local/lib/android/
