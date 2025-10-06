@@ -57,7 +57,7 @@ jobs:
           END
 
       - run: |
-          echo /usr/share/dotnet/sdk/* | xargs -n1 | xargs -n1 -P8 rm -rf
+          echo /usr/share/dotnet/sdk/*/* | xargs -n1 | xargs -n1 -P8 rm -rf
 
       - run: |
-          du -h -s /usr/local/lib/android/sdk/ndk/*/*
+          du -h -s /usr/local/lib/android/sdk/ndk/*/* | xargs -n1 | xargs -n1 -P8 rm -rf
