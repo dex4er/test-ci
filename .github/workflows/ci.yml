@@ -23,11 +23,11 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
       - name: Show environment
         run: set
@@ -56,14 +56,14 @@ jobs:
           ${{ toJson(vars) }}
           END
 
-      - name: Cache Perl cpm
-        uses: actions/cache@v3
-        with:
-          path: ~/.perl-cpm/cache
-          key: ${{ runner.os }}-cpm
+      - run: |
+          du -s -h /usr/share/dotnet
+          find /usr/share/dotnet | wc -l
 
-      - run: brew install cpm
-      - run: cpm install -g --no-test --color Perl::Critic Perl::Tidy
-      - run: brew unlink perl && brew link perl
-      - run: perltidy --version
-      - run: perlcritic --version
+      - run: |
+          du -s -h /usr/local/lib/android
+          find /usr/local/lib/android | wc -l
+
+      - run: |
+          du -s -h /opt/ghc
+          find /opt/ghc | wc -l
